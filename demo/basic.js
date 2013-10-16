@@ -9,26 +9,18 @@ var fiber;
 function work() {
 	fiber = Fiber.current;
 
-	client.on('response',
-    	function(type, success, data) {
-        	util.debug('response: ' + type + ' success: ' + success );
-        	fiber.run();
-    	});
+	client.synchronize(fiber.run.bind(fiber), Fiber.yield.bind(Fiber));
+	
+	console.log('connect: ' + client.connect('HOST', 'USERNAME', 'PASSWORD'));
 
-	client.connect('pop.domain.com', 'USERNAME', 'PASSWORD');
-	Fiber.yield();
+	console.log('user: ' + client.user('USERNAME'));
 
-	client.user('USERNAME');
-	Fiber.yield();
+	console.log('pass: ' + client.pass('PASSWORD'));
 
-	client.pass('PASSWORD');
-	Fiber.yield();
+	console.log('list: ' + client.list());
 
-	client.list();
-	Fiber.yield();
-
-	client.quit();
-	Fiber.yield();
+	console.log('quit: ' + client.quit());
+	
 }
 
 Fiber(function() { work(); }).run();
