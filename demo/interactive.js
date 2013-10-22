@@ -34,29 +34,29 @@ function work() {
 	if (host === '') return;
 
 	var connected = client.connect(host);
-	if (!connected) console.log('could not connect');
+	console.log(connected);
 	
+	console.log(client.beginCommand(100));
+
 	while (connected) {
 		var command = read('command: ');
-		if (!command || command === '' || typeof command !== 'string' ) break;
+		if (typeof command !== 'string' || command === '') break;
+		
+		var args = undefined;
+		var verb = command.trim();
+		var idx = verb.indexOf(' ');
+		if ( idx > 0) {
+			verb = command.substr(0, idx);
+			args = command.substr(idx+1).trim();
+			if (args === '') args = undefined;
+		}
 
-		var result = '';
-		if (command.substr(0,5).toLowerCase() === 'user ') result = client.user(command.substr(5));
-		else if (command.substr(0,5).toLowerCase() === 'pass ') result = client.pass(command.substr(5));
-		else if (command.substr(0,4).toLowerCase() === 'list') result = client.list(command.substr(4));
-		else if (command.substr(0,5).toLowerCase() === 'retr ') result = client.retr(command.substr(5));
-		else if (command.substr(0,4).toLowerCase() === 'stat') result = client.stat(command.substr(4));
-		else if (command.substr(0,4).toLowerCase() === 'noop') result = client.noop(command.substr(4));
-		else if (command.substr(0,4).toLowerCase() === 'rset') result = client.rset(command.substr(4));
-		else if (command.substr(0,5).toLowerCase() === 'dele ') result = client.dele(command.substr(5));
-		else if (command.substr(0,4).toLowerCase() === 'quit') result = client.quit(command.substr(4));
-		else if (command.substr(0,4).toLowerCase() === 'top ') result = client.top(command.substr(4));
-		else if (command.substr(0,4).toLowerCase() === 'uidl') result = client.uidl(command.substr(4));
-		else if (command.substr(0,5).toLowerCase() === 'apop') result = client.apop(command.substr(4));
-
-		if (result) {
-			console.log(result);
-			if (result.data) console.log(result.data);
+		var result;
+		if (verb === 'show') console.log(client);
+		else {
+			result = args? client[verb.toLowerCase()](args) : client[verb.toLowerCase()]();
+			if (result.parsedResult) console.log(result.parsedResult);
+			else console.log(result);
 		}
 	}
 }
