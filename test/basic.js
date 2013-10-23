@@ -13,6 +13,6 @@ suite("POP3Client", function() {
 	test("connect", function() {
 
 		var client = pop3.Client({});
-		client.connect('HOST', 'USERNAME', 'PASSWORD');
+		client.connect('pop.mail.yahoo.com', 'anilkn@yahoo.com', 'test');
 	});
 });

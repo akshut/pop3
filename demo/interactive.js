@@ -34,11 +34,13 @@ function work() {
 	if (host === '') return;
 
 	var connected = client.connect(host);
-	console.log(connected);
+	if (connected.error) {
+		console.log('could not connect to host: ' + host);
+		return;
+	}
+	else console.log(connected.response);
 	
-	console.log(client.beginCommand(100));
-
-	while (connected) {
+	while (true) {
 		var command = read('command: ');
 		if (typeof command !== 'string' || command === '') break;
 		
@@ -56,6 +58,7 @@ function work() {
 		else {
 			result = args? client[verb.toLowerCase()](args) : client[verb.toLowerCase()]();
 			if (result.parsedResult) console.log(result.parsedResult);
+			else if (result.response) console.log(result.response);
 			else console.log(result);
 		}
 	}
