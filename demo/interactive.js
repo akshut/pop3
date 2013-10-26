@@ -33,7 +33,7 @@ function work() {
 	var host = read('host: ');
 	if (host === '') return;
 
-	var connected = client.connect(host);
+	var connected = client.connect(host, true);
 	if (connected.error) {
 		console.log('could not connect to host: ' + host);
 		return;
