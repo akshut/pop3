@@ -11,15 +11,15 @@ function work() {
 
 	client.synchronize(fiber.run.bind(fiber), Fiber.yield.bind(Fiber));
 	
-	console.log('connect: ' + client.connect('HOST', 'USERNAME', 'PASSWORD'));
+	console.log('connect: ', client.connect(HOST));
 
-	console.log('user: ' + client.user('USERNAME'));
+	console.log('user: ' , client.user(USERNAME));
 
-	console.log('pass: ' + client.pass('PASSWORD'));
+	console.log('pass: ' , client.pass(PASSWORD));
 
-	console.log('list: ' + client.list());
+	console.log('list: ' , client.list());
 
-	console.log('quit: ' + client.quit());
+	console.log('quit: ' , client.quit());
 	
 }
 
