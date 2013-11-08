@@ -7,22 +7,24 @@ pop3 is a Nodejs library implementing the POP3 protocol. The client library impl
 
 A demo is available under the demo folder.  An interactive demo is available at demo/interactive.js. This illustrates how this library can be used to run synchronously. A sample session is as follows:
 
-`host: pop.mail.yahoo.com`
-`+OK hello from popgate-0.8.0.504347 pop108.mail.gq1.yahoo.com`
-`command: user USERNAME`
-`+OK password required.`
-`command: pass PASSWORD`
-`+OK maildrop ready, 4077 messages (875008486 octets) (1634370939)`
-`command: stat`
-`+OK 4077 875008486`
-`command: list 1`
-`+OK 1 2519`
-`command: uidl 10`
-`+OK 10 7986d57effb584a2cc3329bda1e0d11e`
-`command: quit`
-`+OK server signing off.`
-`command:`
-``
+```
+host: pop.mail.yahoo.com
++OK hello from popgate-0.8.0.504347 pop108.mail.gq1.yahoo.com
+command: user USERNAME
++OK password required.
+command: pass PASSWORD
++OK maildrop ready, 4077 messages (875008486 octets) (1634370939)
+command: stat
++OK 4077 875008486
+command: list 1
++OK 1 2519
+command: uidl 10
++OK 10 7986d57effb584a2cc3329bda1e0d11e
+command: quit
++OK server signing off.
+command:
+```
+
 To run the basic demo edit the demo/basic.js to replace HOST, USERNAME and PASSWORD with your mailbox settings. If you need async operation use the setCallback method instead of synchronize.
 
 ## API
