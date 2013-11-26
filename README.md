@@ -3,6 +3,10 @@
 
 pop3 is a Nodejs library implementing the POP3 protocol. The client library implements RFC 1939 and TLS support.
 
+## Installation
+
+`npm install pop3`
+
 ## Demo
 
 A demo is available under the demo folder.  An interactive demo is available at demo/interactive.js. This illustrates how this library can be used to run synchronously. A sample session is as follows:
